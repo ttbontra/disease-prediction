@@ -9,10 +9,9 @@ from PIL import Image
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 import matplotlib.pyplot as plt
-%matplotlib inline
 import cv2
-df = pd.read_csv('/kaggle/input/chest-xray-17-diseases/xray_chest.csv')
-df['jpg'] = '/kaggle/input/chest-xray-17-diseases/files' + df['jpg']
+df = pd.read_csv('diseases/xray_chest.csv')
+df['jpg'] = 'diseases/files' + df['jpg']
 num_photos_per_class = 3
 
 grouped_data = df.groupby('type')
@@ -46,7 +45,7 @@ class CustomDataset(Dataset):
         return len(self.data)
     
     def __getitem__(self, idx):
-        img_path = "/kaggle/input/chest-xray-17-diseases/files" + self.data.loc[idx, 'jpg']
+        img_path = "diseases/files" + self.data.loc[idx, 'jpg']
         label = self.data.loc[idx, 'type']
         
         image = Image.open(img_path).convert('L')
@@ -57,7 +56,7 @@ class CustomDataset(Dataset):
         return image, label
     
 dataset = CustomDataset(
-    csv_file='/kaggle/input/chest-xray-17-diseases/xray_chest.csv',
+    csv_file='diseases/xray_chest.csv',
     transform=transform
 )
 
