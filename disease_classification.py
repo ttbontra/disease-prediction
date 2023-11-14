@@ -27,7 +27,7 @@ for class_name, group in grouped_data:
         axes[i].imshow(img)
         axes[i].axis('off')
     
-    plt.show()
+#    plt.show()
 
 transform = transforms.Compose([
     transforms.Resize((224, 224)),
